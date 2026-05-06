@@ -21,6 +21,12 @@ const router = createRouter({
  component: () => import('../views/FormBukuView.vue'),
  meta: { title: 'Form Buku' }
  },
+{
+    path: '/test-shadcn',
+    name: 'TestShadcn',
+    component: () => import('../views/TestShadcn.vue'),
+    meta: { title: 'Test Shadcn' }
+},
  // Route lain ditambahkan di Bab 4
  ],
  scrollBehavior: () => ({ top: 0, behavior: 'smooth' }),
