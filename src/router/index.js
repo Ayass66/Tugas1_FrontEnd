@@ -1,5 +1,12 @@
 // src/router/index.js — tambahkan route katalog
 import { createRouter, createWebHistory } from 'vue-router'
+// import halaman
+import Showcase from '@/views/Showcase.vue'
+import ProductPage from '@/views/ProductPage.vue'
+import UserPage from '@/views/UserPage.vue'
+import LoginPage from '@/views/LoginPage.vue'
+import TablePage from '@/views/TablePage.vue'
+import ModalPage from '@/views/ModalPage.vue'
 const router = createRouter({
  history: createWebHistory(import.meta.env.BASE_URL),
  routes: [
@@ -27,6 +34,18 @@ const router = createRouter({
     component: () => import('../views/TestShadcn.vue'),
     meta: { title: 'Test Shadcn' }
 },
+{
+    path: '/showcase',
+    name: 'Showcase',
+    component: () => import('../views/Showcase.vue'),
+    meta: { title: 'Showcase' }
+},
+ { path: '/', component: Showcase },
+  { path: '/product', component: ProductPage },
+  { path: '/user', component: UserPage },
+  { path: '/login', component: LoginPage },
+  { path: '/table', component: TablePage },
+  { path: '/modal', component: ModalPage },
  // Route lain ditambahkan di Bab 4
  ],
  scrollBehavior: () => ({ top: 0, behavior: 'smooth' }),

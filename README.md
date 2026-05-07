@@ -67,248 +67,415 @@ npm run lint
 
 Project ini merupakan implementasi **Component-Based Architecture** menggunakan **Vue 3**, **shadcn-vue**, dan **Tailwind CSS v3**.
 
-Aplikasi ini dikembangkan sebagai bagian dari tugas perancangan struktur komponen, dengan fokus pada:
+#  Vue Component Showcase with shadcn-vue
 
-* Penggunaan reusable component
-* Props dan slot
-* Struktur folder modular
-* Integrasi UI dari shadcn-vue
+Project ini merupakan implementasi component-based architecture menggunakan Vue 3 dan shadcn-vue.  
+Aplikasi menampilkan beberapa reusable component yang dibagi menjadi:
+
+- 5 Domain Wrapper Component (menggunakan shadcn-vue)
+- 3 Custom Layout/UI Component
+
+Semua komponen sudah terintegrasi menggunakan Vue Router dan dapat ditampilkan melalui halaman showcase.
 
 ---
 
-##  Struktur Folder
+#  Teknologi yang Digunakan
+
+- Vue 3
+- Vue Router
+- Tailwind CSS
+- shadcn-vue
+
+---
+
+#  Struktur Folder
 
 ```bash
 src/
- ├── components/
- │    ├── ui/          # Komponen dari shadcn-vue
- │    ├── layout/      # Komponen layout (Navbar, Sidebar, dll)
- │    ├── domain/      # Komponen fitur (misalnya buku, katalog, dll)
- │    └── common/      # Komponen custom umum
- │
- ├── views/
- │    ├── AboutView.vue
- │    ├── FormBuku.vue
- │    ├── HomeView.vue
- │    ├── KatalogView.vue
- │    └── TestShadcn.vue
- │
- └── router/
-      └── index.js
+│
+├── components/
+│   │
+│   ├── domain/
+│   │   ├── ProductCard.vue
+│   │   ├── UserCard.vue
+│   │   ├── LoginForm.vue
+│   │   ├── DataTableWrapper.vue
+│   │   └── ModalForm.vue
+│   │
+│   ├── layout/
+│   │   ├── Navbar.vue
+│   │   ├── Sidebar.vue
+│   │   └── DashboardLayout.vue
+│   │
+│   └── ui/
+│       └── (komponen bawaan shadcn-vue)
+│
+├── router/
+│   └── index.js
+│
+├── views/
+│   ├── Showcase.vue
+│   ├── ProductPage.vue
+│   ├── UserPage.vue
+│   ├── LoginPage.vue
+│   ├── TablePage.vue
+│   └── ModalPage.vue
+│
+├── App.vue
+└── main.js
 ```
 
 ---
 
-##  Daftar Komponen
+#  DOMAIN WRAPPER COMPONENT
 
-### 🔹 Komponen dari shadcn-vue
+## 1. ProductCard.vue
 
-#### 1. Button
+###  Deskripsi
+Komponen untuk menampilkan informasi produk menggunakan Card component dari shadcn-vue.
 
-Digunakan untuk aksi seperti klik tombol.
+###  Fitur
+- Menampilkan nama produk
+- Menampilkan harga produk
+- Tombol aksi “Beli”
 
-**Contoh penggunaan:**
+###  Props
+
+| Props | Type | Keterangan |
+|------|------|-------------|
+| name | String | Nama produk |
+| price | Number | Harga produk |
+
+###  Cara Penggunaan
 
 ```vue
-<Button>Default</Button>
-<Button variant="secondary">Secondary</Button>
-<Button variant="outline">Outline</Button>
+<ProductCard
+  name="Laptop Gaming"
+  :price="15000000"
+/>
 ```
 
 ---
 
-#### 2. Card
+## 2. UserCard.vue
 
-Digunakan sebagai container untuk menampilkan informasi.
+###  Deskripsi
+Komponen card untuk menampilkan informasi pengguna.
 
-**Contoh penggunaan:**
+###  Fitur
+- Menampilkan username
+- Menampilkan email
+- Tombol lihat profil
+
+###  Props
+
+| Props | Type | Keterangan |
+|------|------|-------------|
+| username | String | Nama pengguna |
+| email | String | Email pengguna |
+
+###  Cara Penggunaan
 
 ```vue
-<Card>
-  <CardHeader>
-    <CardTitle>Judul</CardTitle>
-    <CardDescription>Deskripsi</CardDescription>
-  </CardHeader>
-  <CardContent>
-    Isi konten
-  </CardContent>
-</Card>
+<UserCard
+  username="Anggi"
+  email="anggi@email.com"
+/>
 ```
 
 ---
 
-#### 3. Badge
+## 3. LoginForm.vue
 
-Digunakan untuk label atau status.
+###  Deskripsi
+Komponen form login modern menggunakan Input dan Button dari shadcn-vue.
 
-**Contoh penggunaan:**
+###  Fitur
+- Input email
+- Input password
+- Remember me
+- Forgot password
+- Tombol login
+
+###  Cara Penggunaan
 
 ```vue
-<Badge>Default</Badge>
-<Badge variant="secondary">Secondary</Badge>
+<LoginForm />
 ```
 
 ---
 
-#### 4. Input
+## 4. DataTableWrapper.vue
 
-Digunakan untuk input data pada form.
+###  Deskripsi
+Komponen tabel untuk menampilkan data produk menggunakan Table component dari shadcn-vue.
 
-**Contoh penggunaan:**
+###  Fitur
+- Header tabel
+- Menampilkan data dinamis
+- Responsive table
+
+###  Props
+
+| Props | Type | Keterangan |
+|------|------|-------------|
+| items | Array | Data tabel |
+
+###  Cara Penggunaan
 
 ```vue
-<Input placeholder="Masukkan data..." />
+<DataTableWrapper :items="data" />
+```
+
+###  Contoh Data
+
+```js
+const data = [
+  {
+    id: 1,
+    name: 'Laptop',
+    price: 10000000
+  },
+  {
+    id: 2,
+    name: 'Mouse',
+    price: 250000
+  }
+]
 ```
 
 ---
 
-#### 5. Dialog / Modal
+## 5. ModalForm.vue
 
-Digunakan untuk popup atau konfirmasi.
+###  Deskripsi
+Komponen popup/modal menggunakan Dialog component dari shadcn-vue.
 
-**Contoh penggunaan:**
+###  Fitur
+- Popup dialog
+- Input form
+- Tombol simpan
+- Tombol batal
+
+###  Cara Penggunaan
 
 ```vue
-<Dialog>
-  <DialogTrigger>Buka</DialogTrigger>
-  <DialogContent>Isi modal</DialogContent>
-</Dialog>
+<ModalForm />
 ```
 
 ---
 
-##  Komponen Custom
+#  CUSTOM LAYOUT/UI COMPONENT
 
-#### 6. Komponen Layout
+## 6. Navbar.vue
 
-Contoh: Navbar, Sidebar
+###  Deskripsi
+Komponen navigasi atas aplikasi.
 
-**Fungsi:**
+###  Fitur
+- Judul aplikasi
+- Menu navigasi
+- Avatar user
 
-* Navigasi halaman aplikasi
-
-**Penggunaan:**
+###  Cara Penggunaan
 
 ```vue
 <Navbar />
+```
+
+---
+
+## 7. Sidebar.vue
+
+###  Deskripsi
+Komponen sidebar untuk navigasi halaman.
+
+###  Fitur
+- Menu dashboard
+- Link navigasi
+- Routing antar halaman
+
+###  Cara Penggunaan
+
+```vue
 <Sidebar />
 ```
 
 ---
 
-#### 7. Komponen Domain (Buku/Katalog)
+## 8. DashboardLayout.vue
 
-Digunakan untuk menampilkan data seperti katalog buku.
+###  Deskripsi
+Layout utama aplikasi yang menggabungkan:
+- Navbar
+- Sidebar
+- Content area
 
-**Contoh penggunaan:**
+###  Fitur
+- Layout responsive
+- Reusable layout
+- Slot content
 
-```vue
-<KartuBuku :judul="buku.judul" :penulis="buku.penulis" />
-```
-
----
-
-#### 8. Komponen Form
-
-Digunakan pada halaman FormBuku untuk input data buku.
-
-**Contoh penggunaan:**
+###  Cara Penggunaan
 
 ```vue
-<FormBuku />
+<DashboardLayout>
+
+  <h1>Dashboard</h1>
+
+</DashboardLayout>
 ```
 
 ---
 
-##  Props & Slot
+#  Routing Halaman
 
-###  Props
-
-Digunakan untuk mengirim data ke komponen.
-
-**Contoh:**
-
-```vue
-<KartuBuku :judul="buku.judul" :penulis="buku.penulis" />
-```
-
----
-
-###  Slot
-
-Digunakan untuk membuat komponen fleksibel.
-
-**Contoh:**
-
-```vue
-<Card>
-  <h1>Konten bebas</h1>
-</Card>
-```
+| Route | Halaman |
+|------|----------|
+| / | Showcase |
+| /product | Product Page |
+| /user | User Page |
+| /login | Login Page |
+| /table | Table Page |
+| /modal | Modal Page |
 
 ---
 
-##  Halaman (Views)
+#  Penjelasan Halaman
 
-* **HomeView.vue** → Halaman utama
-* **AboutView.vue** → Informasi aplikasi
-* **KatalogView.vue** → Menampilkan daftar buku
-* **FormBuku.vue** → Form input data buku
-* **TestShadcn.vue** → Halaman testing komponen shadcn
+## 1. Showcase.vue
 
----
+Halaman utama yang menampilkan seluruh menu showcase komponen.
 
-##  Halaman Showcase / Testing
-
-Halaman:
-
-```
-/test-shadcn
-```
-
-Digunakan untuk:
-
-* Menguji komponen shadcn
-* Menampilkan Button, Card, Badge, dll
+### Fitur:
+- Card menu interaktif
+- Routing ke masing-masing halaman
+- Responsive grid layout
 
 ---
 
-##  Cara Menjalankan Project
+## 2. ProductPage.vue
 
-1. Install dependency
+Halaman untuk menampilkan implementasi ProductCard component.
+
+### Fitur:
+- Menampilkan beberapa produk
+- Menggunakan reusable ProductCard
+
+---
+
+## 3. UserPage.vue
+
+Halaman untuk menampilkan implementasi UserCard component.
+
+### Fitur:
+- Menampilkan informasi user
+- Reusable user card
+
+---
+
+## 4. LoginPage.vue
+
+Halaman login modern menggunakan LoginForm component.
+
+### Fitur:
+- Tampilan centered layout
+- Modern login UI
+
+---
+
+## 5. TablePage.vue
+
+Halaman untuk menampilkan DataTableWrapper component.
+
+### Fitur:
+- Menampilkan data dalam bentuk tabel
+- Dynamic rendering data
+
+---
+
+## 6. ModalPage.vue
+
+Halaman implementasi modal/dialog form.
+
+### Fitur:
+- Popup dialog
+- Form input
+- Button action
+
+---
+
+#  Cara Menjalankan Project
+
+## 1. Install Dependency
 
 ```bash
 npm install
 ```
 
-2. Jalankan project
+---
+
+## 2. Install Vue Router
+
+```bash
+npm install vue-router
+```
+
+---
+
+## 3. Install shadcn-vue
+
+```bash
+npm install shadcn-vue
+```
+
+---
+
+## 4. Init shadcn-vue
+
+```bash
+npx shadcn-vue@latest init
+```
+
+---
+
+## 5. Install Komponen shadcn-vue
+
+```bash
+npx shadcn-vue@latest add button
+npx shadcn-vue@latest add card
+npx shadcn-vue@latest add input
+npx shadcn-vue@latest add dialog
+npx shadcn-vue@latest add table
+```
+
+---
+
+## 6. Jalankan Project
 
 ```bash
 npm run dev
 ```
 
-3. Buka di browser
+---
 
-```
-http://localhost:5173/test-shadcn
-```
+#  Hasil Project
+
+Project berhasil mengimplementasikan:
+
+✅ Component-based architecture  
+✅ Reusable component  
+✅ shadcn-vue integration  
+✅ Custom layout component  
+✅ Vue Router integration  
+✅ Responsive UI Design  
+✅ Domain wrapper component  
+✅ Showcase component page  
 
 ---
 
-##  Repository
+#  Author
 
-Branch: `feat/shadcn-components`
+Nama: Anggi Larasati  
+Mata Kuliah: Front-End Web Development
 
----
-
-##  Kesimpulan
-
-Project ini telah memenuhi kriteria tugas:
-
-* Minimal 8 komponen
-* Menggunakan shadcn-vue
-* Mengimplementasikan props dan slot
-* Struktur folder modular
-* Memiliki halaman showcase/testing
-
----

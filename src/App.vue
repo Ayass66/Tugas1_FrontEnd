@@ -99,7 +99,7 @@
     </header>
 
     <!-- Content -->
-    <main>
+    <main class="pt-20">
       <RouterView />
     </main>
   </div>
